@@ -5,17 +5,18 @@ import OAuth from "../components/OAuth.jsx";
 
 
 export default function SignUp() {
-  const [formData,setFormdata]=useState({}) ;    // changing the data from one to another state
+  const [formData,setFormdata]=useState({}) ;    
   const [error, setError]=useState(null);
   const [loading, setLoading]=useState(false);
   const navigate=useNavigate();
   const handleChange=(e)=>{
     setFormdata({
-      ...formData,                             //  ... is spread operator for not loosing customer data
+      ...formData,                             
       [e.target.id]:e.target.value
     });
   }
-  const handleSubmit=async()=>{
+ const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
       const res = await fetch('/server-side/auth/sign-up', {
